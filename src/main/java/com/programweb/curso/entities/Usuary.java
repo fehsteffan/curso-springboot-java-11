@@ -2,10 +2,17 @@ package com.programweb.curso.entities;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Usuary implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String description;
@@ -13,12 +20,12 @@ public class User implements Serializable {
 	private String password;
 	
 	
-	public User() {
+	public Usuary() {
 			
 	}
 
 
-	public User(Long id, String name, String description, String price, String password) {
+	public Usuary(Long id, String name, String description, String price, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -95,7 +102,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuary other = (Usuary) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
