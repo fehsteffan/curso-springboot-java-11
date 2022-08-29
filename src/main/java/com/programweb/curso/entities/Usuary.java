@@ -1,13 +1,20 @@
 package com.programweb.curso.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_usuary")
 public class Usuary implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -15,9 +22,14 @@ public class Usuary implements Serializable {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String description;
-	private String price;
+	private String email;
+	private String phone;
 	private String password;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
+	
 	
 	
 	public Usuary() {
@@ -25,12 +37,12 @@ public class Usuary implements Serializable {
 	}
 
 
-	public Usuary(Long id, String name, String description, String price, String password) {
+	public Usuary(Long id, String name, String email, String phone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = description;
-		this.price = price;
+		this.email = email;
+		this.phone = phone;
 		this.password = password;
 	}
 
@@ -55,23 +67,23 @@ public class Usuary implements Serializable {
 	}
 
 
-	public String getDescription() {
-		return description;
+	public String getEmail() {
+		return email;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
-	public String getPrice() {
-		return price;
+	public String getPhone() {
+		return phone;
 	}
 
 
-	public void setPrice(String price) {
-		this.price = price;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 
@@ -92,6 +104,10 @@ public class Usuary implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}	
 
 
 	@Override
@@ -109,6 +125,9 @@ public class Usuary implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+
+
+	
 	
 }
