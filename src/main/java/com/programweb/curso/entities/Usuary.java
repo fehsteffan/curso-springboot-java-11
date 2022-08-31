@@ -96,6 +96,9 @@ public class Usuary implements Serializable {
 		this.password = password;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}	
 
 	@Override
 	public int hashCode() {
@@ -105,9 +108,7 @@ public class Usuary implements Serializable {
 		return result;
 	}
 	
-	public List<Order> getOrders() {
-		return orders;
-	}	
+	
 
 
 	@Override
